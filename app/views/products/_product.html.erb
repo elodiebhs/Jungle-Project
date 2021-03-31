@@ -18,6 +18,14 @@
   </footer>
 
   <aside class="price">
-    <%= product.price %>
+    <%= humanized_money_with_symbol product.price %>
   </aside>
+
+  <% if product.quantity == 0 %>
+    <aside class="sold-out">
+      Sold out!
+    </aside>
+  <% end %>
+
+
 </article>
