@@ -58,3 +58,9 @@ group :production do
   gem 'newrelic_rpm'
   gem 'rails_12factor'
 end
+
+# Run against this stable release
+group :development, :test do
+  gem 'rspec-rails', '~> 3.5'
+end
+
