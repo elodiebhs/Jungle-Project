@@ -11,115 +11,115 @@ require 'spec_helper'
 RSpec.describe User, type: :model do
   describe 'Validations' do
 
-it "must be created with a password" do
-  user = User.create(
-    :name => "elodie",
-    :email => "exemple@exemple.com", 
-    :password => nil, 
-    :password_confirmation => "123"
-  )
+  it "must be created with a password" do
+    user = User.create(
+      :name => "elodie",
+      :email => "exemple@exemple.com", 
+      :password => nil, 
+      :password_confirmation => "123"
+    )
 
-  expect(user).to_not be_valid
-  expect(user.errors.full_messages).to include "Password can't be blank"
+    expect(user).to_not be_valid
+    expect(user.errors.full_messages).to include "Password can't be blank"
+
+  end
+
+
+  it "must be created with a password_confirmation" do
+    user = User.new(
+      :name => "elodie",
+      :email => "exemple@exemple.com", 
+      :password => "123", 
+      :password_confirmation => nil
+    )
+
+    expect(user).to_not be_valid
+    expect(user.errors.full_messages).to include "Password confirmation can't be blank"
+
+  end
+
+  it "should check that password and password_confirmation match" do
+    user = User.create(
+      :name => "elodie",
+      :email => "exemple@exemple.com", 
+      :password => "123", 
+      :password_confirmation => "1234"
+    )
+
+    expect(user).to_not be_valid
+    expect(user.errors.full_messages).to include "Password confirmation doesn't match Password"
+
+  end
+
+
+  it "should check that email is unique" do
+    user1 = User.create(
+      :name => "elodie",
+      :email => "exemple@exemple.com", 
+      :password => "123", 
+      :password_confirmation => "123"
+    )
+
+    user2 = User.create(
+      :name => "elodie",
+      :email => "exemple@exempLE.com", 
+      :password => "123", 
+      :password_confirmation => "123"
+    )
+
+    expect(user2).to_not be_valid
+    # expect(user.errors.full_messages).to include "Email must be unique"
+
+  end
+
+  it "should have a name" do
+    user = User.create(
+      :name => nil,
+      :email => "exemple@exemple.com", 
+      :password => "123", 
+      :password_confirmation => "123"
+    )
+    expect(user).to_not be_valid
+    expect(user.errors.full_messages).to include "Name can't be blank"
+  end
+
+  it "should have an email" do
+    user = User.create(
+      :name => "elodie",
+      :email => nil, 
+      :password => "123", 
+      :password_confirmation => "123"
+    )
+    expect(user).to_not be_valid
+    expect(user.errors.full_messages).to include "Email can't be blank"
+  end
+
+  it "should check that passsword has a minimum length" do
+    user = User.create(
+      :name => "elodie",
+      :email => "exemple@exemple.com", 
+      :password => "12", 
+      :password_confirmation => "12"
+    )
+    expect(user).to_not be_valid
+    expect(user.errors.full_messages).to include "Password is too short (minimum is 3 characters)"
+  end
 
 end
 
 
-it "must be created with a password_confirmation" do
-  user = User.new(
-    :name => "elodie",
-    :email => "exemple@exemple.com", 
-    :password => "123", 
-    :password_confirmation => nil
-  )
-
-  expect(user).to_not be_valid
-  expect(user.errors.full_messages).to include "Password confirmation can't be blank"
-
-end
-
-it "should check that password and password_confirmation match" do
-  user = User.create(
-    :name => "elodie",
-    :email => "exemple@exemple.com", 
-    :password => "123", 
-    :password_confirmation => "1234"
-  )
-
-  expect(user).to_not be_valid
-  expect(user.errors.full_messages).to include "Password confirmation doesn't match Password"
-
-end
-
-
-it "should check that email is unique" do
-  user1 = User.create(
-    :name => "elodie",
-    :email => "exemple@exemple.com", 
-    :password => "123", 
-    :password_confirmation => "123"
-  )
-
-  user2 = User.create(
-    :name => "elodie",
-    :email => "exemple@exempLE.com", 
-    :password => "123", 
-    :password_confirmation => "123"
-  )
-
-  expect(user2).to_not be_valid
-  # expect(user.errors.full_messages).to include "Email must be unique"
-
-end
-
-it "should have a name" do
-  user = User.create(
-    :name => nil,
-    :email => "exemple@exemple.com", 
-    :password => "123", 
-    :password_confirmation => "123"
-  )
-  expect(user).to_not be_valid
-  expect(user.errors.full_messages).to include "Name can't be blank"
-end
-
-it "should have an email" do
-  user = User.create(
-    :name => "elodie",
-    :email => nil, 
-    :password => "123", 
-    :password_confirmation => "123"
-  )
-  expect(user).to_not be_valid
-  expect(user.errors.full_messages).to include "Email can't be blank"
-end
-
-it "should check that passsword has a minimum length" do
-  user = User.create(
-    :name => "elodie",
-    :email => "exemple@exemple.com", 
-    :password => "12", 
-    :password_confirmation => "12"
-  )
-  expect(user).to_not be_valid
-  expect(user.errors.full_messages).to include "Password is too short (minimum is 3 characters)"
-end
-
-end
-
-
-describe '.authenticate_with_credentials' do
-  it 'return an instance of the user' do
-  user1 = User.create(
-    :name => "elodie",
-    :email => "exemple@exemple.com", 
-    :password => "123", 
-    :password_confirmation => "123"
-  )
-  user = User.authenticate_with_credentials('  EXemple@exemple.com', '123')
-  expect(user).to be_an_instance_of(User)
-end
-end
+  describe '.authenticate_with_credentials' do
+    it 'return an instance of the user' do
+    user1 = User.create(
+      :name => "elodie",
+      :email => "exemple@exemple.com", 
+      :password => "123", 
+      :password_confirmation => "123"
+    )
+    user = User.authenticate_with_credentials('  EXemple@exemple.com', '123')
+    expect(user).to be_an_instance_of(User)
+  end
+  end
 
 
 
