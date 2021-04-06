@@ -75,7 +75,7 @@ end
 it "should have a name" do
   user = User.create(
     :name => nil,
-    :email => "exemple@exempLE.com", 
+    :email => "exemple@exemple.com", 
     :password => "123", 
     :password_confirmation => "123"
   )
@@ -92,6 +92,17 @@ it "should have an email" do
   )
   expect(user).to_not be_valid
   expect(user.errors.full_messages).to include "Email can't be blank"
+end
+
+it "should check that passsword has a minimum length" do
+  user = User.create(
+    :name => "elodie",
+    :email => "exemple@exemple.com", 
+    :password => "12", 
+    :password_confirmation => "12"
+  )
+  expect(user).to_not be_valid
+  expect(user.errors.full_messages).to include "Password is too short (minimum is 3 characters)"
 end
 
 
