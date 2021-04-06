@@ -105,7 +105,23 @@ it "should check that passsword has a minimum length" do
   expect(user.errors.full_messages).to include "Password is too short (minimum is 3 characters)"
 end
 
+end
 
-  end
+
+describe '.authenticate_with_credentials' do
+  it 'return an instance of the user' do
+  user1 = User.create(
+    :name => "elodie",
+    :email => "exemple@exemple.com", 
+    :password => "123", 
+    :password_confirmation => "123"
+  )
+  user = User.authenticate_with_credentials('  EXemple@exemple.com', '123')
+  expect(user).to be_an_instance_of(User)
+end
+end
+
+
+
 
 end
