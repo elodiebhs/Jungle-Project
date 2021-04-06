@@ -1,3 +1,12 @@
+# Each example (it) is run in isolation of others. Therefore each example will needs its own @category created and then @product initialized with that category
+# Create an initial example that ensures that a product with all four fields set will indeed save successfully
+# Have one example for each validation, and for each of these:
+# Set all fields to a value but the validation field being tested to nil
+# Test that the expect error is found within the .errors.full_messages array
+
+
+
+
 require 'rails_helper'
 require 'spec_helper'
 
@@ -71,3 +80,4 @@ RSpec.describe Product, type: :model do
     # validation tests/examples here
   end
 end
+
