@@ -21,10 +21,10 @@ RSpec.feature "Visitor navigates to home page", type: :feature, js: true do
     # ACT
     visit root_path
     first('article.product').find('.btn-default').click()
-
+    save_screenshot()
 
   #   VERIFY
     expect(page).to have_css 'article.product-detail'
-    page.save_screenshot()
+    save_screenshot()
   end
 end
