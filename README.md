@@ -37,5 +37,24 @@ More information in their docs: <https://stripe.com/docs/testing#cards>
 ##### Main Page
 !["Screenshot of Main Page"](https://raw.githubusercontent.com/elodiebhs/Jungle-Project/master/Images/Home%20Page.png)
 
+##### Login
+!["Screenshot of Main Page"](https://raw.githubusercontent.com/elodiebhs/Jungle-Project/master/Images/Login.png)
+
+##### Sold out
+!["Screenshot of Main Page"](https://raw.githubusercontent.com/elodiebhs/Jungle-Project/master/Images/soldout.png)
+
+
+##### Admin - products
+!["Screenshot of Main Page"](https://raw.githubusercontent.com/elodiebhs/Jungle-Project/master/Images/Admin%20-all%20products.png)
+
+
+##### Admin - categories
+!["Screenshot of Main Page"](https://raw.githubusercontent.com/elodiebhs/Jungle-Project/master/Images/Admin%20-%20categories.png)
+
+
+##### My card
+!["Screenshot of Main Page"](https://raw.githubusercontent.com/elodiebhs/Jungle-Project/master/Images/My%20Card.png
+)
+
 
 
